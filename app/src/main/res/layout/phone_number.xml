@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="7dp"
     android:paddingEnd="5dp"
-    android:paddingStart="5dp">
+    android:paddingStart="5dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/HEADLINE"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <CheckBox
@@ -28,8 +30,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:textSize="25dp"
-            android:text="TextView" />
+            android:text="phone number"
+            android:textSize="25dp" />
 
         <ImageButton
             android:id="@+id/expand_button"
@@ -41,12 +43,18 @@
             app:srcCompat="@android:drawable/arrow_down_float" />
 
     </LinearLayout>
-
     <View
         style="@style/LineDot5333333"
+        />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subrecyclverview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:paddingStart="50dp"/>
+
+
+</LinearLayout>

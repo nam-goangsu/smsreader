@@ -14,7 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/type"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date" />
         <TextView
             android:id="@+id/smsAddress"
             android:layout_width="wrap_content"
@@ -23,11 +28,13 @@
 
             android:text="Address" />
 
+
+
         <TextView
             android:id="@+id/smsDate"
-            android:paddingTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:text="Date" />
 
         <TextView

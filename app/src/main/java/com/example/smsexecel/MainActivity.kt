@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Telephony
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -94,6 +95,8 @@ class MainActivity : AppCompatActivity() {
         var masteraddress :String = ""
         var sms1:SMS
         var sms2:SMS
+        var testpar :MutableList<SMSParent> = mutableListOf()
+        var parent : SMSParent
 
         val cursor: Cursor? = contentResolver.query(Telephony.Sms.CONTENT_URI, null, null, null, null)
         /// gruop 부분 st
@@ -106,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             while (it.moveToNext()) {
 
                 //TODO ADDRESS가 이전값과 같은지 확인 다르면 데이터 형식이 달라짐
-                val id = it.getString(it.getColumnIndexOrThrow(Telephony.Sms._ID))
+//                val id = it.getString(it.getColumnIndexOrThrow(Telephony.Sms._ID))
                 val address = it.getString(it.getColumnIndexOrThrow(Telephony.Sms.ADDRESS))
 
                 val date = it.getString(it.getColumnIndexOrThrow(Telephony.Sms.DATE))
@@ -122,10 +125,9 @@ class MainActivity : AppCompatActivity() {
                     //todo 처음이면 masteraddress에 등록
                     masteraddress = address
                   //  smsList.add(SMS(RowType.Head_text,"",address,"","",false))
-                    sms1 = SMS(RowType.Head_text,"",address,"","",false)
+                    sms1 = SMS(RowType.Head_text,address,"","",false)
                     //smsList.add(SMS(RowType.Body_text,id,address,a.toString(),body,false))
-                    sms2 = SMS(RowType.Body_text,id,address,a.toString(),body,false)
-
+                    sms2 = SMS(RowType.Body_text,address,a.toString(),body,false)
 
                     if (smsMap.containsKey(address)) {
                         smsMap[address]?.add(sms1)
@@ -139,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                     //todo
 
               //      smsList.add(SMS(RowType.Body_text,id,address,a.toString(),body,false))
-                    sms2 = SMS(RowType.Body_text,id,address,a.toString(),body,false)
+                    sms2 = SMS(RowType.Body_text,address,a.toString(),body)
 
                     if (smsMap.containsKey(address)) {
                         smsMap[address]?.add(sms2)
@@ -152,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 //                    smsList.add(SMS(RowType.Head_text,"",address,"","",false))
 //                    sms1 = SMS(RowType.Head_text,"",address,"","",false)
                 //    smsList.add(SMS(RowType.Body_text,id,address,a.toString(),body,false))
-                    sms2 = SMS(RowType.Body_text,id,address,a.toString(),body,false)
+                    sms2 = SMS(RowType.Body_text,address,a.toString(),body,false)
                     if (smsMap.containsKey(address)) {
                         //smsMap[address]?.add(sms1)
                         smsMap[address]?.add(sms2)
@@ -172,8 +174,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
 /// gruop 부분 st
                 //val sms = SMS(id, address, a.toString(), body)
                 /*if (smsMap.containsKey(address)) {
@@ -186,6 +186,21 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
+
+        val headtext  = smsMap.keys.toList() // 전화 번호 그룹
+
+        headtext.forEachIndexed { index, s ->
+
+            val testkey = headtext[index]
+            val testvalues = smsMap[testkey]?:  mutableListOf()
+
+            parent = SMSParent(testkey,false,false,testvalues)
+            testpar.add(parent)
+        }
+
+//todo testpar로 헤드와 list 정리
+        Log.d("test" , "parent ${testpar.size}")
 /// gruop 부분 st
 /*        smsGroups.clear()
         smsGroups.addAll(smsMap.map { it.key to it.value })*/

@@ -2,12 +2,18 @@ package com.example.smsexecel
 
 data class SMS(
     val tyepo: RowType,
-    val id: String,
     val address: String,
     val date: String,
     val body: String,
-    val check: Boolean = false,
-    val expandchecker: Boolean = false
+    val check: Boolean = false
+)
+
+data class SMSParent(
+    val addresskey :String,
+    val isExpend :Boolean = false,
+    val check :Boolean=false,
+    val smschaild : MutableList<SMS>
+
 )
 
 data class SMS_real(val id: String, val address: String, val date: String, val body: String)

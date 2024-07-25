@@ -1,7 +1,6 @@
 package com.example.smsexecel
 
 import android.util.Log
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SMSAdapter (private val smsList: MutableMap<String,MutableList<SMS>>, private val selectedSMS: MutableList<selectSMS>) :
     RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
-        var mSelectedItems = SparseBooleanArray(0)
+
 
     inner class SMSViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val headline = itemView.findViewById<LinearLayout>(R.id.HEADLINE) //main
@@ -50,12 +49,25 @@ class SMSAdapter (private val smsList: MutableMap<String,MutableList<SMS>>, priv
         // valuew값들이 가져옴 하지만 안쪽에 넣어야함 안쪽list 정보를 적용 size 적용
         val testvalues = smsList[testkey]?:  mutableListOf()
 
-
-
         val testvaluedate = testvalues[0].tyepo
 
         holder.headtext.text = testkey
 
+
+        //todo 클릭하면 해당 내용 전부 저장
+        /*        val sms = smsList[position]
+                holder.checkBox.isChecked = selectedSMS.contains(sms)*/
+        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                testvalues.forEachIndexed { index, sms ->
+                    selectedSMS.add(selectSMS(testvalues[index].address.toString(),testvalues[index].date.toString(),testvalues[index].body.toString()))
+                }
+            } else {
+                testvalues.forEachIndexed { index, sms ->
+                    selectedSMS.remove(selectSMS(testvalues[index].address.toString(),testvalues[index].date.toString(),testvalues[index].body.toString()))
+                }
+            }
+        }
 
         holder.subrecycler.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.subrecycler.adapter = SMSMotherAdapter(testvalues,selectedSMS)
@@ -81,23 +93,7 @@ class SMSAdapter (private val smsList: MutableMap<String,MutableList<SMS>>, priv
 
         }
 
-//todo 클릭하면 해당 내용 전부 저장
 
-
-/*        val sms = smsList[position]
-        holder.checkBox.isChecked = selectedSMS.contains(sms)*/
-
-        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                testvalues.forEachIndexed { index, sms ->
-                    selectedSMS.add(selectSMS(testvalues[index].address.toString(),testvalues[index].date.toString(),testvalues[index].body.toString(),true))
-                }
-            } else {
-                testvalues.forEachIndexed { index, sms ->
-                    selectedSMS.remove(selectSMS(testvalues[index].address.toString(),testvalues[index].date.toString(),testvalues[index].body.toString(),true))
-                }
-            }
-        }
         // todo 보여주는 폰번호 만큼 list 크기를 생성 초기값 false로 주고 이후 참값이면 변경되게 변경
 /*
         val isExpanded = expendList.contains(expendList[position])

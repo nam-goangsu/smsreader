@@ -35,11 +35,11 @@ class SMSMotherAdapter (private val smsList: List<SMS>, private val  selectedSMS
 
         holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                    selectedSMS.add(selectSMS(smstext.address.toString(),smstext.date.toString(),smstext.body.toString(),true))
+                    selectedSMS.add(selectSMS(smstext.address.toString(),smstext.date.toString(),smstext.body.toString()))
 
             } else {
 
-                    selectedSMS.remove(selectSMS(smstext.address.toString(),smstext.date.toString(),smstext.body.toString(),true))
+                    selectedSMS.remove(selectSMS(smstext.address.toString(),smstext.date.toString(),smstext.body.toString()))
 
             }
         }

@@ -61,7 +61,10 @@ class MainActivity : AppCompatActivity() {
         smsAdapter = SMSAdapter(smsMap,  selectedSMS)
        // smsMotherAdapter = SMSMotherAdapter(smsList, selectedSMS)
 
-        recyclerView.adapter = smsAdapter
+        recyclerView.adapter = smsAdapter.apply {
+            setHasStableIds(true)
+        }
+
 
         val buttonSaveSMS = findViewById<Button>(R.id.buttonSaveSMS)
 
@@ -95,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         val cursor: Cursor? = contentResolver.query(Telephony.Sms.CONTENT_URI, null, null, null, null)
         /// gruop 부분 st
         //smsMap["00000000000"]?.add(SMS(RowType.All_Select,"","","","All Sms input",false))
-        smsMap["00000000000"] = mutableListOf(SMS(RowType.All_Select,"","","","All Sms input",false))
+    //    smsMap["00000000000"] = mutableListOf(SMS(RowType.All_Select,"","","","All Sms input",false))
 
         /// gruop 부분 ed
         cursor?.use {

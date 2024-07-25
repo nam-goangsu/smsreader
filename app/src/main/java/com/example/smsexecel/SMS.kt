@@ -6,8 +6,11 @@ data class SMS(
     val address: String,
     val date: String,
     val body: String,
-    val check: Boolean = false
+    val check: Boolean = false,
+    val expandchecker: Boolean = false
 )
+
+data class SMS_real(val id: String, val address: String, val date: String, val body: String)
 
 enum class RowType(val id: Int) {
     All_Select(0),
@@ -18,4 +21,4 @@ enum class RowType(val id: Int) {
 }
 
 
-data class selectSMS(val address: String, val date: String, val body: String, val check: Boolean)
+data class selectSMS(val address: String, val date: String, val body: String)

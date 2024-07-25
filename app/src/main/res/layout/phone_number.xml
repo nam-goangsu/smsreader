@@ -5,9 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="7dp"
-    android:paddingEnd="5dp"
-    android:paddingStart="5dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -38,8 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-
-            android:padding="15dp"
             app:srcCompat="@android:drawable/arrow_down_float" />
 
     </LinearLayout>
@@ -52,8 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingEnd="10dp"
-        android:paddingTop="10dp"
-
+        android:paddingTop="5dp"
         android:paddingStart="50dp"/>
 
 
